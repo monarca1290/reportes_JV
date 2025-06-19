@@ -699,7 +699,13 @@
                     submitButton.textContent = 'Enviando...'; // Change button text
                     loadingMessage.style.display = 'block'; // Show loading message
 
+                    // Create FormData object from the form
                     const formData = new FormData(form);
+                    
+                    // Remove the image file from FormData if present
+                    if (formData.get('imagen')) {
+                        formData.delete('imagen');
+                    }
 
                     try {
                         const response = await fetch(scriptURL, {
@@ -713,7 +719,7 @@
                         if (response.ok) {
                             const data = await response.json();
                             if (data.success) {
-                                alert('Certificado generado exitosamente. URL del certificado: ' + data.url);
+                                alert('Certificado generado exitosamente. Los datos se han registrado correctamente.');
                                 form.reset(); // Clear the form fields
                             } else {
                                 alert('Error al generar el certificado: ' + data.message);
