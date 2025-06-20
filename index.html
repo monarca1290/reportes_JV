@@ -4,150 +4,601 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Generador de Certificados - Joyería Venezia</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <title>Joyería Venezia - Menú Principal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --gold: #D4AF37; --dark: #1A1A1A; --light: #F8F8F8;
-            --gray: #6D6D6D; --gray-light: #E8E8E8; --transition: all 0.3s ease;
+            --gold: #D4AF37;
+            --gold-light: #F5E6C8;
+            --primary: #f5f5f5;
+            --secondary: #ffffff;
+            --accent: #D4AF37;
+            --text: #333333;
+            --gray: #6D6D6D;
+            --gray-light: #E8E8E8;
+            --transition: all 0.3s ease;
         }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: 'Montserrat', sans-serif; background-color: var(--light);
-            display: flex; justify-content: center; align-items: center;
-            min-height: 100vh; padding: 20px;
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--primary);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
             background-image: url('https://images.unsplash.com/photo-1605100804763-247f67b3557e?q=80&w=1470&auto=format&fit=crop');
-            background-size: cover; background-position: center; background-attachment: fixed;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
         }
+
         body::before {
-            content: ''; position: fixed; top: 0; left: 0;
-            width: 100%; height: 100%; background: rgba(0, 0, 0, 0.6);
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.8);
+            z-index: -1;
         }
-        .container {
-            max-width: 1000px; width: 100%; background: white; border-radius: 15px;
-            overflow: hidden; box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
-            display: grid; grid-template-columns: 1fr 1.5fr; min-height: 700px;
-            animation: fadeIn 0.8s ease-out; z-index: 1;
+
+        .main-menu-container {
+            max-width: 600px;
+            width: 100%;
+            background: var(--secondary);
+            border-radius: 15px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            text-align: center;
+            animation: fadeIn 0.8s ease-out;
         }
-        .brand-section {
-            background: linear-gradient(135deg, #1A1A1A 0%, #3A3A3A 100%); color: white; padding: 40px;
-            display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
-        .logo { width: 180px; margin-bottom: 30px; filter: brightness(0) invert(1); }
-        .brand-title { font-family: 'Playfair Display', serif; font-size: 2.2rem; color: var(--gold); }
-        .form-section { padding: 40px; overflow-y: auto; max-height: 80vh; }
-        .form-title { font-family: 'Playfair Display', serif; font-size: 1.8rem; margin-bottom: 20px; text-align: center; color: var(--dark); }
-        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-        .form-group { margin-bottom: 15px; }
-        .form-group.full-width { grid-column: span 2; }
-        label { display: block; margin-bottom: 8px; font-weight: 500; }
-        input, select, textarea {
-            width: 100%; padding: 12px 15px; border: 1px solid var(--gray-light);
-            border-radius: 6px; font-family: 'Montserrat', sans-serif; transition: var(--transition);
+
+        .menu-header {
+            margin-bottom: 40px;
         }
-        input:focus, select:focus, textarea:focus {
-            outline: none; border-color: var(--gold); box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.2);
+
+        .menu-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 10px;
+            position: relative;
+            display: inline-block;
         }
-        textarea { min-height: 100px; resize: vertical; }
-        .fixed-value { background-color: var(--gray-light); padding: 12px 15px; border-radius: 6px; font-weight: 500; }
+
+        .menu-title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: var(--gold);
+        }
+
+        .menu-subtitle {
+            color: var(--gray);
+            font-size: 1rem;
+            margin-top: 15px;
+        }
+
+        .menu-options {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .menu-btn {
+            background: var(--accent);
+            color: var(--text);
+            border: none;
+            padding: 18px 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: var(--transition);
+            width: 100%;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            display: block;
+        }
+
+        .menu-btn:hover {
+            background: #C9A227;
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .menu-btn:active {
+            transform: translateY(0);
+        }
+
+        #btnCertificadoJoyas {
+            background: var(--gold);
+            color: var(--text);
+        }
+
+        #btnCertificadoJoyas:hover {
+            background: #C9A227;
+            color: white;
+        }
+
+        /* --- FORM LAYOUT IMPROVEMENTS --- */
+
+        .main-menu-container.form-layout {
+            max-width: 900px; /* Increased width for better two-column layout */
+            padding: 40px; /* Consistent padding */
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr; /* Default to single column on small screens */
+            gap: 20px; /* Space between form groups */
+            margin-top: 30px; /* Space between title and form fields */
+        }
+
+        @media (min-width: 650px) { /* Two columns for wider screens */
+            .form-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 25px 30px; /* Increased gap for better spacing between columns and rows */
+            }
+
+            /* Make specific fields span two columns if they need more space or logical grouping */
+            .form-grid .full-width {
+                grid-column: 1 / -1; /* Span all columns */
+            }
+
+            /* Specifically target fields that should span full width */
+            .form-grid .form-group:nth-child(1), /* Número de Reporte */
+            .form-grid .form-group:nth-last-child(2), /* Grabado Interno */
+            .form-grid .form-group:last-child /* Descripción Adicional */
+            {
+                grid-column: 1 / -1;
+            }
+        }
+
+
+        .form-group {
+            margin-bottom: 0; /* Remove default margin as grid handles spacing */
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px; /* Slightly more space for labels */
+            font-weight: 600;
+            color: var(--text);
+            font-size: 0.95rem; /* Slightly smaller for compactness */
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px; /* Increased padding for better touch targets */
+            border: 1px solid var(--gray-light);
+            border-radius: 8px; /* Slightly more rounded corners */
+            font-size: 1rem; /* Consistent font size */
+            color: var(--text);
+            background-color: var(--primary); /* Light background for inputs */
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        textarea {
+            min-height: 120px; /* Slightly taller textarea */
+            resize: vertical;
+        }
+
+        .fixed-value {
+            background: var(--gray-light);
+            padding: 12px; /* Match input padding */
+            border-radius: 8px; /* Match input border-radius */
+            color: var(--gray); /* Softer color for fixed text */
+            font-weight: 500;
+            font-size: 1rem;
+            min-height: 48px; /* Ensure consistent height with inputs */
+            display: flex; /* For vertical alignment */
+            align-items: center;
+        }
+
         .submit-btn {
-            background: var(--gold); color: white; border: none; padding: 15px;
-            font-size: 1rem; font-weight: 600; border-radius: 8px; cursor: pointer;
-            transition: var(--transition); width: 100%; text-transform: uppercase;
+            background: var(--gold);
+            color: white; /* Changed text color to white for better contrast */
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.1rem; /* Slightly larger for prominence */
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: var(--transition);
+            width: 100%;
+            margin-top: 30px; /* More space above the submit button */
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            font-family: 'Montserrat', sans-serif;
         }
-        .submit-btn:hover { background: #C9A227; transform: translateY(-2px); }
-        .submit-btn:disabled { background-color: var(--gray); cursor: not-allowed; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        .submit-btn:hover {
+            background: #C9A227;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: var(--gold);
+            box-shadow: 0 0 8px rgba(212, 175, 55, 0.6); /* More prominent focus shadow */
+        }
+
+        .form-group select {
+            appearance: none;
+            background-image: url('data:image/svg+xml;utf8,<svg fill="%236D6D6D" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
+            background-repeat: no-repeat;
+            background-position: right 12px center; /* Adjusted arrow position */
+            background-size: 20px;
+            padding-right: 40px; /* Increased right padding for arrow */
+        }
+
+        .menu-btn,
+        .submit-btn {
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+        }
+
+        /* Responsive adjustments */
         @media (max-width: 768px) {
-            .container { grid-template-columns: 1fr; }
-            .form-grid { grid-template-columns: 1fr; }
-            .form-group.full-width { grid-column: span 1; }
-            .form-section { max-height: none; }
+            .main-menu-container {
+                padding: 30px;
+            }
+
+            .main-menu-container.form-layout {
+                max-width: 95%; /* Adjust for smaller screens */
+                padding: 25px;
+            }
+
+            .menu-title {
+                font-size: 2rem;
+            }
+
+            .menu-btn {
+                padding: 15px 25px;
+                font-size: 1rem;
+            }
+
+            input, select, textarea, .fixed-value {
+                padding: 10px; /* Slightly smaller padding on small screens */
+                font-size: 0.95rem;
+            }
+
+            .submit-btn {
+                padding: 14px 25px;
+                font-size: 1rem;
+            }
+
+            .form-grid {
+                gap: 15px; /* Reduce gap on smaller screens */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .menu-title {
+                font-size: 1.7rem; /* Smaller title on very small screens */
+            }
+
+            .menu-subtitle {
+                font-size: 0.9rem;
+            }
+
+            .menu-btn {
+                padding: 12px 20px;
+                font-size: 0.9rem;
+            }
+
+            .submit-btn {
+                padding: 12px 20px;
+                font-size: 0.9rem;
+            }
         }
     </style>
 </head>
 
 <body>
-    <div class="container">
-        <div class="brand-section">
-            <img src="https://joyeriavenezia.com/wp-content/uploads/2021/11/joyeria-venezia-logo-c.svg" alt="Joyería Venezia" class="logo">
-            <h1 class="brand-title">Certificación de Joyas</h1>
+    <div class="main-menu-container" id="mainMenu">
+        <div class="menu-header">
+            <h1 class="menu-title">Bienvenido a Joyería Venezia</h1>
+            <p class="menu-subtitle">Seleccione una opción para continuar</p>
         </div>
-
-        <div class="form-section">
-            <h2 class="form-title">Formulario de Certificación</h2>
-
-            <form id="reporteForm">
-                <div class="form-grid">
-                    <div class="form-group"><label for="reporte_numero">Número de Reporte</label><input type="text" id="reporte_numero" name="reporte_numero" required></div>
-                    <div class="form-group"><label for="gramos_oro">Gramos de Oro</label><input type="text" id="gramos_oro" name="gramos_oro" required></div>
-                    <div class="form-group"><label for="gramos_plata">Gramos de Plata</label><input type="text" id="gramos_plata" name="gramos_plata" required></div>
-                    <div class="form-group"><label>Ley del Oro</label><div class="fixed-value">18kt ley 750</div><input type="hidden" name="ley_oro" value="18kt ley 750"></div>
-                    <div class="form-group"><label>Ley de la Plata</label><div class="fixed-value">Ley 950</div><input type="hidden" name="ley_plata" value="Ley 950"></div>
-                    <div class="form-group"><label for="tipo_piedra">Tipo de Piedra</label><input type="text" id="tipo_piedra" name="tipo_piedra" required></div>
-                    <div class="form-group"><label for="cantidad_piedra">Cantidad de Piedras</label><input type="number" id="cantidad_piedra" name="cantidad_piedra" required></div>
-                    <div class="form-group"><label for="talla_piedra">Talla de la Piedra</label><input type="text" id="talla_piedra" name="talla_piedra" required></div>
-                    <div class="form-group"><label for="calidad_piedra">Calidad de la Piedra</label><input type="text" id="calidad_piedra" name="calidad_piedra" required></div>
-                    <div class="form-group"><label for="forma_piedra">Forma de la Piedra</label><input type="text" id="forma_piedra" name="forma_piedra" required></div>
-                    <div class="form-group"><label for="color_piedra">Color de la Piedra</label><input type="text" id="color_piedra" name="color_piedra" required></div>
-                    <div class="form-group"><label for="origen_piedra">Origen de la Piedra</label><input type="text" id="origen_piedra" name="origen_piedra" required></div>
-                    <div class="form-group"><label for="medida_piedra_mm">Medida Piedra (mm)</label><input type="text" id="medida_piedra_mm" name="medida_piedra_mm" required></div>
-                    <div class="form-group"><label for="quilataje_total_ct">Quilataje Total (Ct)</label><input type="text" id="quilataje_total_ct" name="quilataje_total_ct" required></div>
-                    <div class="form-group full-width"><label for="grabado_interno">Grabado Interno</label><input type="text" id="grabado_interno" name="grabado_interno"></div>
-                    
-                    <div class="form-group full-width"><label for="descripcion_producto">Descripción del Producto</label><textarea id="descripcion_producto" name="descripcion_producto" required></textarea></div>
-                    <input type="hidden" name="codigo_qr" value=""> </div>
-                <div class="form-group full-width">
-                     <button type="submit" class="submit-btn" id="submitBtn">Guardar Registro</button>
-                </div>
-            </form>
+        <div class="menu-options">
+            <button class="menu-btn" onclick="loadContent('vip')">Clientes VIP</button>
+            <button class="menu-btn" onclick="loadContent('corrientes')">Clientes Corrientes</button>
+            <button class="menu-btn" id="btnCertificadoJoyas" onclick="loadContent('certificado')">Certificado Joyas</button>
         </div>
     </div>
 
-    <script>
-        const form = document.getElementById('reporteForm');
-        const submitBtn = document.getElementById('submitBtn');
-        
-        // ***************************************************************
-        // ** PEGA AQUÍ LA URL DE DESPLIEGUE DE TU GOOGLE APPS SCRIPT    **
-        // ***************************************************************
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbww2-ovN2Uak_6oPELRKuv-UZISfBuyBaxeLDFE3PV4FsaNy13s_GGjC2LAmBUXVG8a/exec'; 
+    <div id="contentContainer" style="display: none; justify-content: center; align-items: center; width: 100%;"></div>
 
-        form.addEventListener('submit', e => {
-            e.preventDefault();
-            
+    <script>
+        // ¡IMPORTANTE! Esta URL es la de tu Web App de Google Apps Script.
+        const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbyM96O4GA8ZzFrqRYPzCSo8rMKLrXxVY5jcqMmCsElsxcgdnW90uaxIO0Dunomi0Jwe/exec'; 
+
+        function loadContent(option) {
+            const mainMenu = document.getElementById('mainMenu');
+            const contentContainer = document.getElementById('contentContainer');
+
+            mainMenu.style.display = 'none';
+            contentContainer.innerHTML = '';
+
+            if (option === 'certificado') {
+                contentContainer.style.display = 'flex';
+                contentContainer.innerHTML = `
+                    <div class="main-menu-container form-layout"> <h2 class="menu-title">Formulario de Certificación</h2>
+                        <form id="certificadoForm">
+                            <div class="form-grid"> <div class="form-group full-width">
+                                    <label for="reporte_numero">Número de Reporte</label>
+                                    <input type="text" id="reporte_numero" name="reporte_numero" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="gramos_oro">Gramos de Oro</label>
+                                    <input type="text" id="gramos_oro" name="gramos_oro" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="gramos_plata">Gramos de Plata</label>
+                                    <input type="text" id="gramos_plata" name="gramos_plata" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="color_oro">Color de Oro</label>
+                                    <select id="color_oro" name="color_oro" required>
+                                        <option value="">Seleccione un color</option>
+                                        <option value="Amarillo">Amarillo</option>
+                                        <option value="Rosado">Rosado</option>
+                                        <option value="Blanco">Blanco</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Ley del Oro</label>
+                                    <div class="fixed-value" name="Ley del Oro">18kt ley 750</div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Ley de la Plata</label>
+                                    <div class="fixed-value" name="Ley de la Plata">Ley 950</div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="tipo_piedra">Tipo de Piedra</label>
+                                    <select id="tipo_piedra" name="tipo_piedra" required>
+                                        <option value="">Seleccione una opción</option>
+                                        <option value="Diamante">Diamante</option>
+                                        <option value="Esmeralda">Esmeralda</option>
+                                        <option value="Zafiro">Zafiro</option>
+                                        <option value="Rubí">Rubí</option>
+                                        <option value="Corindones">Corindones</option>
+                                        <option value="Amatista">Amatista</option>
+                                        <option value="Topacio">Topacio</option>
+                                        <option value="Peridoto">Peridoto</option>
+                                        <option value="Granate">Granate</option>
+                                        <option value="Rodolita">Rodolita</option>
+                                        <option value="Praciolita">Praciolita</option>
+                                        <option value="Citrino">Citrino</option>
+                                        <option value="Moissanita">Moissanita</option>
+                                        <option value="Diamante Crecido en Laboratorio">Diamante Crecido en Laboratorio</option>
+                                        <option value="Diamante Natural">Diamante Natural</option>
+                                        <option value="Diamante Tratado Natural">Diamante Tratado Natural</option>
+                                        <option value="Vidrio">Vidrio</option>
+                                        <option value="Aguamarina">Aguamarina</option>
+                                        <option value="Moisannita">Moisannita</option>
+                                    </select>
+                                </div>
+                                <div class="form-group"> <label for="cantidad_piedra">Cantidad de Piedra</label>
+                                    <input type="number" id="cantidad_piedra" name="cantidad_piedra" min="1" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="calidad_piedra">Calidad de la Piedra</label>
+                                    <select id="calidad_piedra" name="calidad_piedra" required>
+                                        <option value="">Seleccione una opción</option>
+                                        <option value="Extra">Extra</option>
+                                        <option value="A">A</option>
+                                        <option value="AA">AA</option>
+                                        <option value="AAA">AAA</option>
+                                        <option value="AAAA">AAAA</option>
+                                        <option value="Buena">Buena</option>
+                                        <option value="I1">I1</option>
+                                        <option value="SI2">SI2</option>
+                                        <option value="I3">I3</option>
+                                        <option value="VS1">VS1</option>
+                                        <option value="VVS2">VVS2</option>
+                                        <option value="SI1">SI1</option>
+                                        <option value="Natural">Natural</option>
+                                        <option value="Sintético">Sintético</option>
+                                        <option value="Sin graduación de claridad por relleno de fisuras">Sin graduación de claridad por relleno de fisuras</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="color_piedra">Color de la Piedra</label>
+                                    <select id="color_piedra" name="color_piedra" required>
+                                        <option value="">Seleccione una opción</option>
+                                        <option value="Blanca">Blanca</option>
+                                        <option value="Verde">Verde</option>
+                                        <option value="Azul">Azul</option>
+                                        <option value="Roja">Roja</option>
+                                        <option value="Amarillo">Amarillo</option>
+                                        <option value="Naranja">Naranja</option>
+                                        <option value="Rosada">Rosada</option>
+                                        <option value="Amarillo Oscuro">Amarillo Oscuro</option>
+                                        <option value="Azul Vivo">Azul Vivo</option>
+                                        <option value="Azul Muy Claro">Azul Muy Claro</option>
+                                        <option value="Irradiado">Irradiado</option>
+                                        <option value="Pink">Pink</option>
+                                        <option value="Sapphire Blue">Sapphire Blue</option>
+                                        <option value="Lemon Yellow">Lemon Yellow</option>
+                                        <option value="Light Green">Light Green</option>
+                                        <option value="Dark Green">Dark Green</option>
+                                        <option value="Red">Red</option>
+                                        <option value="Rango U-V café claro">Rango U-V café claro</option>
+                                        <option value="S-T">S-T</option>
+                                        <option value="I">I</option>
+                                        <option value="K">K</option>
+                                        <option value="H">H</option>
+                                        <option value="G">G</option>
+                                        <option value="Negro">Negro</option>
+                                        <option value="F">F</option>
+                                        <option value="N">N</option>
+                                        <option value="J">J</option>
+                                        <option value="E">E</option>
+                                        <option value="Verde Vívido">Verde Vívido</option>
+                                        <option value="Verde Medio">Verde Medio</option>
+                                        <option value="Verde Intenso">Verde Intenso</option>
+                                        <option value="Azul Profundo">Azul Profundo</option>
+                                        <option value="Rojo Púrpura Profundo">Rojo Púrpura Profundo</option>
+                                        <option value="Sin graduación de color por relleno de fisuras">Sin graduación de color por relleno de fisuras</option>
+                                        <option value="Natural">Natural</option>
+                                        <option value="Azul Intenso">Azul Intenso</option>
+                                        <option value="Rojo Intenso">Rojo Intenso</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="forma_piedra">Forma de la Piedra</label>
+                                    <select id="forma_piedra" name="forma_piedra" required>
+                                        <option value="">Seleccione una opción</option>
+                                        <option value="Redonda">Redonda</option>
+                                        <option value="Corazón">Corazón</option>
+                                        <option value="Esmeralda">Esmeralda</option>
+                                        <option value="Marquis">Marquis</option>
+                                        <option value="Ovalado">Ovalado</option>
+                                        <option value="Lágrima">Lágrima</option>
+                                        <option value="Rectangular">Rectangular</option>
+                                        <option value="Óvalo">Óvalo</option>
+                                        <option value="Cushion">Cushion</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="origen_piedra">Origen de la Piedra</label>
+                                    <input type="text" id="origen_piedra" name="origen_piedra" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="medida_piedra_mm">Medida de la Piedra (mm)</label>
+                                    <input type="text" id="medida_piedra_mm" name="medida_piedra_mm" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="quilataje_total_ct">Quilataje Total (ct)</label>
+                                    <input type="text" id="quilataje_total_ct" name="quilataje_total_ct" required>
+                                </div>
+                                <div class="form-group full-width">
+                                    <label for="grabado_interno">Grabado Interno</label>
+                                    <input type="text" id="grabado_interno" name="grabado_interno">
+                                </div>
+                                <div class="form-group full-width">
+                                    <label for="descripcion_adicional">Descripción Adicional</label>
+                                    <textarea id="descripcion_adicional" name="descripcion_adicional"></textarea>
+                                </div>
+                            </div>
+                            <button type="submit" class="submit-btn">Enviar</button>
+                        </form>
+                        <button class="menu-btn" onclick="goBackToMenu()" style="margin-top: 20px;">Volver al Menú</button>
+                        <div id="formStatus" style="margin-top: 20px; color: green; font-weight: bold;"></div>
+                    </div>
+                `;
+                // Add event listener for the form submission
+                document.getElementById('certificadoForm').addEventListener('submit', handleFormSubmit);
+            } else {
+                contentContainer.style.display = 'flex';
+                contentContainer.innerHTML = `
+                    <div class="main-menu-container">
+                        <h2 class="menu-title">${option === 'vip' ? 'Clientes VIP' : 'Clientes Corrientes'}</h2>
+                        <p class="menu-subtitle">Funcionalidad en desarrollo para esta sección.</p>
+                        <button class="menu-btn" onclick="goBackToMenu()">Volver al Menú Principal</button>
+                    </div>
+                `;
+            }
+        }
+
+        async function handleFormSubmit(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            const form = event.target;
+            const formData = new FormData(form);
+            const formStatus = document.getElementById('formStatus');
+            const submitBtn = form.querySelector('.submit-btn');
+
+            // Add fixed values to formData by reading their 'name' attribute
+            formData.append("Ley del Oro", document.querySelector(".fixed-value[name='Ley del Oro']").innerText);
+            formData.append("Ley de la Plata", document.querySelector(".fixed-value[name='Ley de la Plata']").innerText);
+
+            // Disable button and show loading
             submitBtn.disabled = true;
-            submitBtn.textContent = 'Enviando...';
-            
-            Swal.fire({
-                title: 'Guardando registro...',
-                text: 'Por favor, espere.',
-                allowOutsideClick: false,
-                didOpen: () => { Swal.showLoading(); }
-            });
-            
-            // new FormData(form) funciona igual sin el campo de la imagen.
-            fetch(scriptURL, { method: 'POST', body: new FormData(form)})
-                .then(response => response.json())
-                .then(data => {
-                    if(data.success) {
-                        Swal.fire({ icon: 'success', title: '¡Éxito!', text: data.message });
-                        form.reset();
-                    } else {
-                         Swal.fire({ icon: 'error', title: 'Error', text: data.message });
-                    }
-                })
-                .catch(error => {
-                    Swal.fire({
-                        icon: 'error', title: 'Error de Conexión',
-                        text: 'No se pudo contactar al servidor. Error: ' + error.message,
-                    });
-                })
-                .finally(() => {
-                    submitBtn.disabled = false;
-                    submitBtn.textContent = 'Guardar Registro';
+            submitBtn.innerText = 'Enviando...';
+            formStatus.style.color = 'orange';
+            formStatus.innerText = 'Enviando certificado...';
+
+            try {
+                const response = await fetch(WEB_APP_URL, {
+                    method: 'POST',
+                    body: formData
                 });
-        });
+
+                const result = await response.json(); // Asegúrate de que esto sea .json() si tu script devuelve JSON
+
+                // Si la respuesta incluye el texto "Registro exitoso", considéralo un éxito
+                if (result.result === 'success' || (typeof result.message === 'string' && result.message.includes('Registro exitoso'))) {
+                    formStatus.style.color = 'green';
+                    formStatus.innerText = '¡Certificado enviado con éxito!'; // Mensaje claro para el usuario
+                    form.reset(); // Clear the form
+                    setTimeout(() => {
+                        goBackToMenu(); // Go back to the main menu after a short delay
+                    }, 2000); // 2 second delay
+                } else {
+                    // Si no es un éxito claro y tampoco contiene el mensaje de éxito, entonces es un error
+                    formStatus.style.color = 'red';
+                    formStatus.innerText = 'Error al enviar el certificado: ' + (result.message || 'Error desconocido.');
+                }
+            } catch (error) {
+                formStatus.style.color = 'red';
+                formStatus.innerText = 'Error de conexión: ' + error.message;
+                console.error('Error:', error);
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerText = 'Enviar';
+            }
+        }
+
+
+        function goBackToMenu() {
+            document.getElementById('mainMenu').style.display = 'flex';
+            document.getElementById('contentContainer').style.display = 'none';
+            document.getElementById('contentContainer').innerHTML = '';
+        }
     </script>
 </body>
+
 </html>
